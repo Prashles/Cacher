@@ -45,7 +45,7 @@ class FileCache implements MethodInterface {
 			'data'   => serialize($value)
 		];
 
-		file_put_contents($this->filePath($name), $data);
+		file_put_contents($this->filePath($name), serialize($data));
 	}
 
 	/**
@@ -56,13 +56,7 @@ class FileCache implements MethodInterface {
 	 */
 	public static function get($name)
 	{	
-		$file = $this->filePath($name);
-
-		if (!file_exists($file)) {
-			return null;
-		}
-
-		$file = file($file);
+		$file = $this->fileData($this->filePath($name));
 
 		if ($file['expiry'] < time()) {
 			return null;
@@ -88,10 +82,20 @@ class FileCache implements MethodInterface {
 
 	/**
 	 * Check if cache item exists
-	 * 
+	 *
+	 * @param string   $name
 	 * @return boolean
 	 */
-	public static function exists();
+	public static function exists($name)
+	{
+		$file = $this->fileData($this->filePath($name));
+
+		if ($file === false) {
+			return false;
+		}
+
+		return ($file['expiry'] < time()) ? false : true;
+	}
 
 	/**
 	 * Name of cache file
@@ -101,6 +105,23 @@ class FileCache implements MethodInterface {
 	protected function filePath($name)
 	{
 		return $this->path . md5($name);
+	}
+
+	/**
+	 * Return file data for file
+	 * 
+	 * @param  string $filePath
+	 * @return 
+	 */
+	protected function fileData($filePath)
+	{
+		$file = $this->filePath($name);
+
+		if (!file_exists($file)) {
+			return false;
+		}
+
+		return unserialize(file_get_contents($file));
 	}
 
 }
