@@ -26,7 +26,7 @@ interface MethodInterface {
 	 * @param  mixed $key
 	 * @return null
 	 */
-	public static function remove($key);
+	public static function remove($name);
 
 	/**
 	 * Remove all items in cache
@@ -40,6 +40,6 @@ interface MethodInterface {
 	 * 
 	 * @return boolean
 	 */
-	public static function exists();
+	public static function exists($name);
 
 }
