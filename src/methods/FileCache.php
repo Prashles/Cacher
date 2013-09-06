@@ -22,7 +22,7 @@ class FileCache implements MethodInterface {
 	 * @param string $prefix
 	 * @param string $path
 	 */
-	public function __construct($prefix, $path)
+	public function __construct($path, $prefix = null)
 	{
 		$this->prefix = $prefix;
 		$this->path   = (strlen($path) - 1) == '/') ? $this->path : $this->page . '/';
@@ -71,14 +71,28 @@ class FileCache implements MethodInterface {
 	 * @param  mixed $key
 	 * @return null
 	 */
-	public static function remove($key);
+	public static function remove($name)
+	{
+		$file = $this->filePath($name);
+
+		if (file_exists($file)) {
+			unlink($file);
+		}
+	}
 
 	/**
 	 * Remove all items in cache
 	 * 
 	 * @return null
 	 */
-	public static function removeAll();
+	public static function removeAll()
+	{
+		$files = glob($this->path . '*');
+
+		foreach ($files as $file) {
+			unlink($file);
+		}
+	}
 
 	/**
 	 * Check if cache item exists
@@ -104,7 +118,9 @@ class FileCache implements MethodInterface {
 	 */
 	protected function filePath($name)
 	{
-		return $this->path . md5($name);
+		$fileName = ($prefix == null) ? $name : $prefix '_' . $name;
+
+		return $this->path . md5($fileName);
 	}
 
 	/**
