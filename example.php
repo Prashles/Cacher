@@ -1,9 +1,25 @@
 <?php
 use \Prash\Cacher\Cacher as Cache;
-error_reporting(E_ALL);
-ini_set('display_errors', 'on');
 
 require_once 'src/Cacher/autoload.php';
 
-//Cache::removeAll();
+// Store 'value' as 'item' for 5 minutes
+Cache::store('item', 'value', 5);
 
+// Will return value
+echo Cache::get('item');
+
+// If cache 'item' exists and is not expired, return
+// its value. If it does not exist or is expired, store
+// the return value from the closure
+echo Cache::make('item', 5, function()
+{
+	// Perform some operations
+	return 'foo';
+});
+
+// Remove 'item' from the cache
+Cache::remove('item');
+
+// Remove all items from the cache
+Cache::removeAll();
