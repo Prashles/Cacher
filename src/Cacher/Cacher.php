@@ -12,7 +12,7 @@ class Cacher {
 	/**
 	 * Instantiate class when static method called
 	 * 
-	 * @return null
+	 * @return mixed
 	 */
 	public static function __callStatic($function, $args)
     {
