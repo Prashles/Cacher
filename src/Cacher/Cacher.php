@@ -3,51 +3,42 @@
 class Cacher {
 
 	/**
-	 * Config file
+	 * Hosts config file
 	 * 
 	 * @var array
 	 */
-	protected $config;
-
-	/**
-	 * Class instance of method used
-	 * 
-	 * @var MethodInterface
-	 */
-	protected $method;
-
-	/**
-	 * Init
-	 * 
-	 * @param MethodInterface $method
-	 */
-	public function __construct(MethodInterface $method = null)
-	{
-		global $cacheConfig;
-
-		$this->config = $cacheConfig;
-		$this->method = ($method === null) ? new $cacheConfig['aliases'][$cacheConfig['general']['method']] : $method;
-	}
-
-	public function get()
-	{
-		return $this->instance;
-	}
+	public static $config = null;
 
 	/**
 	 * Instantiate class when static method called
 	 * 
 	 * @return null
 	 */
-	public static function __callStatic($name, $args)
+	public static function __callStatic($function, $args)
     {
-        $class = new ReflectionClass($name);
-        return $class->newInstanceArgs($args);
+    	// If no config file is set, inject default
+    	if (self::$config === null) {
+    		self::$config = include_once __DIR__ . '/config.php';
+    	}
 
-    	//$class = __CLASS__;
+    	$method = 'make' . ucfirst(self::$config['general']['method']) . 'Method';
 
-        //$this->instance = new $class;
+    	$methodInstance = self::$method();
 
-        //return call_user_func_array($name, $args);
+    	$instance = new CacherService(self::$config, $methodInstance);
+
+        return call_user_func_array([$instance, $function], $args);
     }
+
+    /**
+     * Instantiate FileCache class
+     * 
+     * @return FileCache
+     */
+    public static function makeFileMethod()
+    {
+    	return new FileCache(self::$config['file']['path'], self::$config['file']['prefix']);
+    }
+
+
 }

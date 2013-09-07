@@ -5,6 +5,6 @@ ini_set('display_errors', 'on');
 
 require_once 'src/Cacher/autoload.php';
 
-$cache = new Cache;
+//$cache = new Cache;
 
-var_dump( Cache::get() ); 
+var_dump( Cache::get('twat') ); 

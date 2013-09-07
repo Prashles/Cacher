@@ -17,7 +17,4 @@ function __autoload($class)
 	if (file_exists($file)) {
 		include_once $file;
 	}
-	global $cacheConfig;
-
-	$cacheConfig = include_once 'config.php';
 }
