@@ -9,9 +9,9 @@ return [
 	'general' => [
 
 		// Which method to use for caching
-		// file, redis, memcached, apc 
+		// file, redis, memcached, apc, db 
 		'method' => 'file'
-		
+
 	],
 
 	/**
