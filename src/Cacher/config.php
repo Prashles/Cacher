@@ -20,6 +20,10 @@ return [
 		'path'   => getcwd() . '/cache',
 		// Prefix cache file names
 		'prefix' => ''
+	],
+
+	'aliases' => [
+		'file' => '\Prash\Cacher\FileCache'
 	]
 
 ];

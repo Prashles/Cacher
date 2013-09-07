@@ -25,7 +25,7 @@ class FileCache implements MethodInterface {
 	public function __construct($path, $prefix = null)
 	{
 		$this->prefix = $prefix;
-		$this->path   = (strlen($path) - 1) == '/') ? $this->path : $this->page . '/';
+		$this->path   = ((strlen($path) - 1) == '/') ? $this->path : $this->page . '/';
 	}
 
 	/**
@@ -118,7 +118,7 @@ class FileCache implements MethodInterface {
 	 */
 	protected function filePath($name)
 	{
-		$fileName = ($prefix == null) ? $name : $prefix '_' . $name;
+		$fileName = ($prefix == null) ? $name : $prefix . '_' . $name;
 
 		return $this->path . md5($fileName);
 	}
