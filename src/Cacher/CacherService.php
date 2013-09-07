@@ -1,5 +1,7 @@
 <?php namespace Prash\Cacher;
 
+use Closure;
+
 class CacherService {
 
 	/**
@@ -67,12 +69,44 @@ class CacherService {
 		}
 
 		// Otherwise store
-		return $this->method->store($name, $time, $value());
+
+		$value = $value();
+
+		$this->method->store($name, $value, $time);
+
+		return $value;
 	}
 
+	/**
+	 * Remove item from cache
+	 * 
+	 * @param  string $name
+	 * @return null
+	 */
+	public function remove($name)
+	{
+		return $this->method->remove($name);
+	}
+
+	/**
+	 * Remove all files from cache
+	 * 
+	 * @return null
+	 */
 	public function removeAll()
 	{
 		return $this->method->removeAll();
+	}
+
+	/**
+	 * Check if cache item exists
+	 * 
+	 * @param  string $name
+	 * @return boolean
+	 */
+	public function exists($name)
+	{
+		return $this->method->exists($name);
 	}
 
 }
