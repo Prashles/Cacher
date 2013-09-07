@@ -25,7 +25,7 @@ class FileCache implements MethodInterface {
 	public function __construct($path, $prefix = null)
 	{
 		$this->prefix = $prefix;
-		$this->path   = ($path[(strlen($path) - 1)] == '/') ? $this->path : $this->path . '/';
+		$this->path   = ($path[(strlen($path) - 1)] == '/') ? $path : $path . '/';
 	}
 
 	/**
@@ -54,7 +54,7 @@ class FileCache implements MethodInterface {
 	 * @param  string $name
 	 * @return mixed
 	 */
-	public static function get($name)
+	public function get($name)
 	{	
 		$file = $this->fileData($this->filePath($name));
 
@@ -71,7 +71,7 @@ class FileCache implements MethodInterface {
 	 * @param  mixed $key
 	 * @return null
 	 */
-	public static function remove($name)
+	public function remove($name)
 	{
 		$file = $this->filePath($name);
 
@@ -85,7 +85,7 @@ class FileCache implements MethodInterface {
 	 * 
 	 * @return null
 	 */
-	public static function removeAll()
+	public function removeAll()
 	{
 		$files = glob($this->path . '*');
 
@@ -100,7 +100,7 @@ class FileCache implements MethodInterface {
 	 * @param string   $name
 	 * @return boolean
 	 */
-	public static function exists($name)
+	public function exists($name)
 	{
 		$file = $this->fileData($this->filePath($name));
 
@@ -118,7 +118,7 @@ class FileCache implements MethodInterface {
 	 */
 	protected function filePath($name)
 	{
-		$fileName = ($prefix == null) ? $name : $prefix . '_' . $name;
+		$fileName = ($this->prefix == null) ? $name : $this->prefix . '_' . $name;
 
 		return $this->path . md5($fileName);
 	}
@@ -131,13 +131,11 @@ class FileCache implements MethodInterface {
 	 */
 	protected function fileData($filePath)
 	{
-		$file = $this->filePath($name);
-
-		if (!file_exists($file)) {
+		if (!file_exists($filePath)) {
 			return false;
 		}
 
-		return unserialize(file_get_contents($file));
+		return unserialize(file_get_contents($filePath));
 	}
 
 }

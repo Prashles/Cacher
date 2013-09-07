@@ -7,4 +7,4 @@ require_once 'src/Cacher/autoload.php';
 
 //$cache = new Cache;
 
-var_dump( Cache::get('twat') ); 
+Cache::removeAll();

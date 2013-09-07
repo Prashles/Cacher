@@ -39,6 +39,4 @@ class Cacher {
     {
     	return new FileCache(self::$config['file']['path'], self::$config['file']['prefix']);
     }
-
-
 }

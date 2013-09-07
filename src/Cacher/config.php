@@ -17,7 +17,7 @@ return [
 	 */
 	'file'   => [
 		// Path to store cache files
-		'path'   => getcwd() . '/cache',
+		'path'   => getcwd() . '/cache/',
 		// Prefix cache file names
 		'prefix' => ''
 	],
