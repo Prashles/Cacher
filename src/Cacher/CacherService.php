@@ -19,8 +19,9 @@ class CacherService {
 	protected $method;
 
 	/**
-	 * Init
+	 * Set config and method instance
 	 * 
+	 * @param array           $config
 	 * @param MethodInterface $method
 	 */
 	public function __construct(array $config, MethodInterface $method)
