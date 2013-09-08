@@ -1,21 +1,11 @@
 <?php namespace Prash\Cacher;
 
-class DatabaseCache implements MethodInterface {
+class ApcCache implements MethodInterface {
 
-	/**
-	 * Connection instance
-	 * 
-	 * @var PDO
-	 */
-	protected $db;
 
-	public function __construct($host, $username, $password, $database)
+	public function __construct($prefix)
 	{
-		try {
-			$connection = new PDO();	
-		} catch (Exception $e) {
-
-		}
+		
 	}
 	
 	/**

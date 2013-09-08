@@ -50,4 +50,14 @@ class Cacher {
 		return new DatabaseCache(self::config['database']['host'], self::config['database']['username'],
 			self::config['database']['password'], self::config['database']['database_name']);
 	}
+
+	/**
+	 * Instantiate ApcCache class
+	 * 
+	 * @return ApcCache
+	 */
+	public static function makeApcMethod()
+	{
+		return new ApcCache(self::config['apc']['prefix']);
+	}
 }

@@ -49,6 +49,17 @@ return [
 
 	],
 
+	/**
+	 * Settings for APC cache
+	 */
+
+	'apc' => [
+
+		// Prefix item names
+		'prefix' => ''
+
+	],
+
 	'aliases' => [
 		'file' => '\Prash\Cacher\FileCache'
 	]
