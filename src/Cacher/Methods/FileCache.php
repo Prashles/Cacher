@@ -58,7 +58,7 @@ class FileCache implements MethodInterface {
 	{	
 		$file = $this->fileData($this->filePath($name));
 
-		if ($file['expiry'] < time()) {
+		if ($file['expiry'] < time() && $file['expiry'] != 0) {
 			return null;
 		}
 
@@ -108,7 +108,26 @@ class FileCache implements MethodInterface {
 			return false;
 		}
 
-		return ($file['expiry'] < time()) ? false : true;
+		return ($file['expiry'] < time() && $file['expiry'] != 0) ? false : true;
+	}
+
+	/**
+	 * Cache item with no expiry
+	 * 
+	 * @param  string $name
+	 * @param  mixed $value
+	 * @return null
+	 */
+	public function permanent($name, $value)
+	{
+		$path = $this->filePath($name);
+
+		$data = [
+			'expiry' => 0,
+			'data'   => serialize($value)
+		];
+
+		file_put_contents($this->filePath($name), serialize($data));
 	}
 
 	/**
@@ -137,5 +156,4 @@ class FileCache implements MethodInterface {
 
 		return unserialize(file_get_contents($filePath));
 	}
-
 }

@@ -110,4 +110,15 @@ class CacherService {
 		return $this->method->exists($name);
 	}
 
+	/**
+	 * Cache item with no expiry
+	 * 
+	 * @param  string $name
+	 * @param  mixed $value
+	 * @return null
+	 */
+	public function permanent($name, $value)
+	{
+		$this->method->permanent($name, $value);
+	}
 }

@@ -18,6 +18,9 @@ echo Cache::make('item', 5, function()
 	return 'foo';
 });
 
+// Cache item permanently until manually deleted
+Cache::permanent('item', 'value');
+
 // Remove 'item' from the cache
 Cache::remove('item');
 
