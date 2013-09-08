@@ -70,7 +70,8 @@ return [
 	],
 
 	'aliases' => [
-		'file' => '\Prash\Cacher\FileCache'
+		'file' => '\Prash\Cacher\FileCache',
+		'mysql' => '\Prash\Cacher\DatabaseMysqlCache'
 	]
 
 ];

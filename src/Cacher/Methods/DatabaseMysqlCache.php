@@ -2,7 +2,7 @@
 
 use PDO;
 
-class DatabaseCache implements MethodInterface {
+class DatabaseMysqlCache implements DatabaseCacheInterface, MethodInterface {
 
 	/**
 	 * Connection instance
@@ -37,7 +37,7 @@ class DatabaseCache implements MethodInterface {
 	 */
 	public function get($name)
 	{
-
+		
 	}
 
 	/**
@@ -81,6 +81,17 @@ class DatabaseCache implements MethodInterface {
 	public function permanent($name, $value)
 	{
 		
+	}
+
+	/**
+	 * Check if name already exists in table
+	 * 
+	 * @param  string $name
+	 * @return boolean
+	 */
+	public function existsInTable($name)
+	{
+
 	}
 
 }

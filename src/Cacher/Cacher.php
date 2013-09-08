@@ -55,7 +55,9 @@ class Cacher {
 			self::$config['database'][$driver]['username'], self::$config['database'][$driver]['password'], 
 			self::$config['database'][$driver]['database_name']);
 
-		return new DatabaseCache($connectionInstance->$connectionMethod());
+		$class = self::$config['aliases'][$driver];
+
+		return new $class($connectionInstance->$connectionMethod());
 	}
 
 	/**
