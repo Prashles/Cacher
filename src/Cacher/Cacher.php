@@ -47,8 +47,15 @@ class Cacher {
 	 */
 	public static function makeDatabaseMethod()
 	{
-		return new DatabaseCache(self::config['database']['host'], self::config['database']['username'],
-			self::config['database']['password'], self::config['database']['database_name']);
+		$driver = self::$config['database']['driver'];
+
+		$connectionMethod = 'connect' . ucfirst($driver);
+
+		$connectionInstance = new DatabaseConnection(self::$config['database'][$driver]['host'], 
+			self::$config['database'][$driver]['username'], self::$config['database'][$driver]['password'], 
+			self::$config['database'][$driver]['database_name']);
+
+		return new DatabaseCache($connectionInstance->$connectionMethod());
 	}
 
 	/**
@@ -58,6 +65,6 @@ class Cacher {
 	 */
 	public static function makeApcMethod()
 	{
-		return new ApcCache(self::config['apc']['prefix']);
+		return new ApcCache(self::$config['apc']['prefix']);
 	}
 }

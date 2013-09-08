@@ -1,5 +1,7 @@
 <?php namespace Prash\Cacher;
 
+use PDO;
+
 class DatabaseCache implements MethodInterface {
 
 	/**
@@ -9,13 +11,9 @@ class DatabaseCache implements MethodInterface {
 	 */
 	protected $db;
 
-	public function __construct($host, $username, $password, $database)
+	public function __construct(PDO $db)
 	{
-		try {
-			$connection = new PDO();	
-		} catch (Exception $e) {
-
-		}
+		$this->db = $db;
 	}
 	
 	/**

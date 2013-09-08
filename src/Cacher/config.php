@@ -9,8 +9,8 @@ return [
 	'general' => [
 
 		// Which method to use for caching
-		// file, redis, memcached, apc, db 
-		'method' => 'file'
+		// file, redis, memcached, apc, database 
+		'method' => 'database'
 
 	],
 
@@ -35,17 +35,26 @@ return [
 	
 	'database' => [
 
-		// DB Host
-		'host' => 'localhost',
+		// The database driver to use
+		//
+		// Only supports mysql for now
+		'driver' => 'mysql',
 
-		// DB Username
-		'username' => '',
 
-		// DB Password
-		'password' => '',
+		// mysql settings
+		'mysql' => [
+			// DB Host
+			'host' => 'localhost',
 
-		// DB name
-		'database_name' => 'my_db'
+			// DB Username
+			'username' => 'root',
+
+			// DB Password
+			'password' => '',
+
+			// DB name
+			'database_name' => 'cache'
+		]
 
 	],
 
