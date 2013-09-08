@@ -27,6 +27,28 @@ return [
 		'prefix' => ''
 	],
 
+	/**
+	 * Database settings (only mysql for now)
+	 *
+	 * Make sure you have created the cacher_cache table
+	 */
+	
+	'database' => [
+
+		// DB Host
+		'host' => 'localhost',
+
+		// DB Username
+		'username' => '',
+
+		// DB Password
+		'password' => '',
+
+		// DB name
+		'database_name' => 'my_db'
+
+	],
+
 	'aliases' => [
 		'file' => '\Prash\Cacher\FileCache'
 	]

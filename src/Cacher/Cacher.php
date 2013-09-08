@@ -39,4 +39,15 @@ class Cacher {
 	{
 		return new FileCache(self::$config['file']['path'], self::$config['file']['prefix']);
 	}
+
+	/**
+	 * Instantiate DatabaseCache class
+	 * 	
+	 * @return DatabaseCache
+	 */
+	public static function makeDatabaseMethod()
+	{
+		return new DatabaseCache(self::config['database']['host'], self::config['database']['username'],
+			self::config['database']['password'], self::config['database']['database_name']);
+	}
 }
