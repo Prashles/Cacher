@@ -1,8 +1,3 @@
-# Dump of table cacher_cache
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `cacher_cache`;
-
 CREATE TABLE `cacher_cache` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL DEFAULT '',
