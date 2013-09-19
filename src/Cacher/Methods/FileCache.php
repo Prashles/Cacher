@@ -44,8 +44,12 @@ class FileCache implements MethodInterface {
 			'expiry' => time() + ($time * 60),
 			'data'   => serialize($value)
 		];
-
-		file_put_contents($this->filePath($name), serialize($data));
+		
+		try {
+			file_put_contents($this->filePath($name), serialize($data));
+		} catch (Exception $e) {
+			throw new Exception('Could not write to file: ' . $path);
+		}
 	}
 
 	/**
