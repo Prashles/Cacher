@@ -131,7 +131,8 @@ class FileCache implements MethodInterface {
 	}
 
 	/**
-	 * Name of cache file
+	 * Path of cache file
+	 * 
 	 * @param  string $name
 	 * @return string
 	 */
